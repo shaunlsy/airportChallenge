@@ -12,44 +12,55 @@ describe("Airport", function() {
       expect(airport.capacity).toEqual(DEFAULT_CAPACITY);
     });
 
-    it('set the capacity to a new value', function() {
+    it("set the capacity to a new value", function() {
       airport.capacity = 6;
       expect(airport.capacity).toEqual(6);
     });
   });
 
-  describe('can land a plane', function() {
-    it('if the capacity is not full', function() {
-      airport.land(plane)
-      expect(airport.apron.length).toEqual(1)
+  describe("can land a plane", function() {
+    it("if the capacity is not full", function() {
+      airport.land(plane);
+      expect(airport.apron.length).toEqual(1);
     });
 
-    it('can land multiple planes', function() {
-      airport.land(plane)
-      airport.land(plane)
-      airport.land(plane)
-      expect(airport.apron.length).toEqual(3)
-      expect(airport.apron).toEqual([plane, plane, plane])
+    it("can land multiple planes", function() {
+      airport.land(plane);
+      airport.land(plane);
+      airport.land(plane);
+      expect(airport.apron.length).toEqual(3);
+      expect(airport.apron).toEqual([plane, plane, plane]);
     });
   });
 
-  describe('let a plane take off', function() {
-    it('a plane can take off', function() {
-      let plane2 = new Plane('plane2');
-      airport.land(plane)
-      airport.land(plane2)
-      airport.takeoff(plane)
-      expect(airport.apron).toEqual([plane2])
+  describe("let a plane take off", function() {
+    it("a plane can take off", function() {
+      let plane2 = new Plane("plane2");
+      airport.land(plane);
+      airport.land(plane2);
+      airport.takeoff(plane);
+      expect(airport.apron).toEqual([plane2]);
     });
 
-    it('a plane can take off', function() {
-      let plane2 = new Plane('plane2');
-      let plane3 = new Plane('plane3');
-      airport.land(plane)
-      airport.land(plane2)
-      airport.land(plane3)
-      airport.takeoff(plane3)
-      expect(airport.apron).toEqual([plane, plane2])
+    it("a plane can take off", function() {
+      let plane2 = new Plane("plane2");
+      let plane3 = new Plane("plane3");
+      airport.land(plane);
+      airport.land(plane2);
+      airport.land(plane3);
+      airport.takeoff(plane3);
+      expect(airport.apron).toEqual([plane, plane2]);
+    });
+  });
+
+  describe("prevent landing when airport is full", function() {
+    it("prevent landing when airport is full", function() {
+      var times = 20;
+      for (var i = 0; i < times; i++) {
+        airport.land(plane);
+      }
+      expect(airport.apron.length).toEqual(20);
+      expect(airport.land(plane)).toThrowError("Airport is full");
     });
   });
 });
