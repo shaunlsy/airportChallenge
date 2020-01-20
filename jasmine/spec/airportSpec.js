@@ -32,4 +32,24 @@ describe("Airport", function() {
       expect(airport.apron).toEqual([plane, plane, plane])
     });
   });
+
+  describe('let a plane take off', function() {
+    it('a plane can take off', function() {
+      let plane2 = new Plane('plane2');
+      airport.land(plane)
+      airport.land(plane2)
+      airport.takeoff(plane)
+      expect(airport.apron).toEqual([plane2])
+    });
+
+    it('a plane can take off', function() {
+      let plane2 = new Plane('plane2');
+      let plane3 = new Plane('plane3');
+      airport.land(plane)
+      airport.land(plane2)
+      airport.land(plane3)
+      airport.takeoff(plane3)
+      expect(airport.apron).toEqual([plane, plane2])
+    });
+  });
 });

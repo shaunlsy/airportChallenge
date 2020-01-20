@@ -8,3 +8,7 @@ function Airport() {
 Airport.prototype.land = function(plane) {
   this.apron.push(plane);
 }
+
+Airport.prototype.takeoff = function(plane) {
+  this.apron.splice( this.apron.indexOf(plane), 1);
+}
