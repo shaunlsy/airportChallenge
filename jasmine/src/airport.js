@@ -1,13 +1,13 @@
 const DEFAULT_CAPACITY = 20;
 
-function Airport() {
-  this.capacity = DEFAULT_CAPACITY;
+function Airport(capacity = DEFAULT_CAPACITY) {
+  this.capacity = capacity;
   this.apron = [];
 }
 
 Airport.prototype.land = function(plane) {
-  if (this.apron.length === this.capacity) {
-    throw "Airport is full";
+  if (this.apron.length >= this.capacity) {
+    throw new TypeError("Airport is full");
   }
   this.apron.push(plane);
 };
